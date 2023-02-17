@@ -2,7 +2,9 @@
 .token*
 *.private
 *.token.txt
-
+dbacc.txt
+.dbacc*
+.idea*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
