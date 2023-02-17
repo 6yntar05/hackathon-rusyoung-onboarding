@@ -1,6 +1,9 @@
 #!/bin/env python3
 
 import logging
+
+
+
 logging.basicConfig(level=logging.INFO)
 
 from aiogram import Bot, Dispatcher, executor, types
@@ -12,22 +15,20 @@ API_TOKEN = token_get()
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-@dp.message_handler(commands=['start', 'help'])
+@dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     """
     This handler will be called when user sends `/start` or `/help` command
     """
     kb = [
         [
-            types.KeyboardButton(text="Кнопка"),
-            types.KeyboardButton(text="Ещё кнопка")
-        ],
-        [
-            types.KeyboardButton(text="Большая кнопка"),
+            types.KeyboardButton(text="Стажер"),
+            types.KeyboardButton(text="HR"),
+            types.KeyboardButton(text="Ментор")
         ]
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
-    await message.answer("STARTPAGE", reply_markup=keyboard)
+    await message.answer("Приветствую 👋, ты используешь бота Росмолодежи, выбери себе роль!", reply_markup=keyboard)
 
 # INLINE TEST
 inline_btn_1 = InlineKeyboardButton('Первая кнопка!', callback_data='button1')
