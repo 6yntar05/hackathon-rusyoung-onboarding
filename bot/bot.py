@@ -17,11 +17,11 @@ async def send_welcome(message: types.Message):
     """
     kb = [
         [
-            types.KeyboardButton(text="Кнопка"),
-            types.KeyboardButton(text="Ещё кнопка")
+            types.KeyboardButton(text="Стажер"),
+            types.KeyboardButton(text="HR")
         ],
         [
-            types.KeyboardButton(text="Большая кнопка"),
+            types.KeyboardButton(text=""),
         ]
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
