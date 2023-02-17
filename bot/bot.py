@@ -1,9 +1,7 @@
 #!/bin/env python3
+import sys
 
 import logging
-
-
-
 logging.basicConfig(level=logging.INFO)
 
 from aiogram import Bot, Dispatcher, executor, types
@@ -11,6 +9,9 @@ from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButt
 
 from utils.token import token_get
 API_TOKEN = token_get()
+
+#dbhost, dbport, dbuser, dbpasswd, dbname
+#import database.py
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
@@ -56,4 +57,13 @@ async def echo(message: types.Message):
     await message.answer(message.text)
 
 if __name__ == '__main__':
+    
+    dbacc = sys.argv[1]
+    dbhost = dbacc.split(":")[0]
+    dbport = dbacc.split(":")[1].split("@")[0]
+    dbuser = dbacc.split(":")[1].split("@")[1]
+    dbpasswd = dbacc.split(":")[2]
+
+    print(dbhost, dbport, dbuser, dbpasswd)
+
     executor.start_polling(dp, skip_updates=True)
