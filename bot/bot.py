@@ -57,8 +57,8 @@ async def echo(message: types.Message):
     await message.answer(message.text)
 
 if __name__ == '__main__':
-    
     dbacc = sys.argv[1]
+    # host:port@user:passwd
     dbhost = dbacc.split(":")[0]
     dbport = dbacc.split(":")[1].split("@")[0]
     dbuser = dbacc.split(":")[1].split("@")[1]
