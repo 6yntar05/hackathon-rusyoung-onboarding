@@ -1,4 +1,3 @@
-#!/bin/env python3
 import logging
 logging.basicConfig(level=logging.INFO)
 
@@ -11,7 +10,7 @@ API_TOKEN = token_get()
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 
-@dp.message_handler(commands=['start', 'help'])
+@dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     """
     This handler will be called when user sends `/start` or `/help` command
@@ -26,7 +25,7 @@ async def send_welcome(message: types.Message):
         ]
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
-    await message.answer("STARTPAGE", reply_markup=keyboard)
+    await message.answer("Привет, ты используешь бота Росмолодежи выбери себе роль!", reply_markup=keyboard)
 
 # INLINE TEST
 inline_btn_1 = InlineKeyboardButton('Первая кнопка!', callback_data='button1')
