@@ -12,7 +12,7 @@ from utils.token import token_get
 from  database import sqlite_db
 import random
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
+#just a trash for fun
 API_TOKEN = token_get()
 #dbhost, dbport, dbuser, dbpasswd, dbname
 #import database.py
