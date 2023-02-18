@@ -20,9 +20,14 @@ API_TOKEN = token_get()
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-class UsersStateGroup(StatesGroup):
+class UserStateGroup(StatesGroup):
+    new_user = State()
+    registration = State()
+    registrated_user = State()
+
+class RegistrationStateGroup(StatesGroup):
     last_name = State()
-    frist_name = State()
+    first_name = State()
     date = State()
 
 async def on_startup(_):
@@ -39,46 +44,47 @@ async def send_welcome(message: types.Message):
     buttons = ["Сотрудник"]
     keyboard.add(*buttons)
     await message.answer("Приветствую 👋, ты используешь бота Росмолодежи, выбери роль!", reply_markup=keyboard)
+    await UserStateGroup.new_user.set()
 
 
 
-@dp.message_handler(regexp='(^Сотрудник)')
+@dp.message_handler(state=UserStateGroup.new_user)
 async def youngcmd_start(message: types.Message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    buttons = ["Зарегаться"]
+    buttons = ["Начать процесс регистрации"]
     keyboard.add(*buttons)
-    await message.answer('Привет ты, в системе зарегистрируейся!',reply_markup=keyboard)
-
+    await message.answer('Привет ты, в системе, но для начала необходимо зарегистрироваться!',reply_markup=keyboard)
+    await UserStateGroup.registration.set()
     #await create_profile(user_id=message.from_user.id)
 
-@dp.message_handler(regexp='(^Зарегаться)')
+@dp.message_handler(state=UserStateGroup.registration)
 async def create_profile(message: types.Message):
     await sqlite_db.create_profile(id=message.from_user.id)
-    await message.reply("Хорошо, давай начнем введи свою Фамилию:")
-    await UsersStateGroup.last_name.set()
+    await message.reply("Хорошо, давай начнем процесс регистрации, введи свою фамилию:")
+    await RegistrationStateGroup.last_name.set()
 
-@dp.message_handler(state=UsersStateGroup.last_name)
+@dp.message_handler(state=RegistrationStateGroup.last_name)
 async def last_name_in_db(message: types.Message, state:FSMContext):
     async with state.proxy() as data:
         data['last_name'] = message.text
 
     await  message.reply('Теперь как тебя зовут:')
-    await UsersStateGroup.next()
+    await RegistrationStateGroup.first_name.set()
 
-@dp.message_handler(state=UsersStateGroup.frist_name)
+@dp.message_handler(state=RegistrationStateGroup.first_name)
 async def first_name_in_db(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['first_name'] = message.text
 
     await  message.reply('Теперь введи свою дату рождения:')
-    await UsersStateGroup.next()
+    await RegistrationStateGroup.date.set()
 
-@dp.message_handler(state=UsersStateGroup.date)
+@dp.message_handler(state=RegistrationStateGroup.date)
 async def date_in_db(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['daterod'] = message.text
     await sqlite_db.edit_profile(state, id=message.from_user.id)
-    await message.reply('Акк создан!')
+    await message.reply('Аккаунт успешно создан!')
     await state.finish()
 
 
