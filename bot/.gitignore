@@ -1,11 +1,11 @@
 # Project-specific files
 .token*
 *.private
-bot/token.txt/
+.token.txt
 dbacc.txt
 .dbacc*
 .idea*
-
+users.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
