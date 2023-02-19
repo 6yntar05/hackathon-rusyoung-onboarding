@@ -25,7 +25,7 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 
 class UserStateGroup(StatesGroup):
-    new_user = State()
+    #new_user = State()
     last_name = State()
     first_name = State()
     date = State()
