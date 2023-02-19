@@ -22,6 +22,8 @@
 <p> Реквизиты тестового пользователя: email: <b>guest</b>, пароль: <b>guest</b> </p>
 
 # Развёртка
+`git clone https://github.com/6yntar05/hackathon-rusyoung-onboarding && cd hackathon-rusyoung-onboarding`
+  
 ## Python-бот
 Читать bot/README.md
 

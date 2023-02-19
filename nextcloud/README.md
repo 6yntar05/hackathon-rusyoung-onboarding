@@ -6,6 +6,7 @@
 ### Подготовка ОС:
 #### RockyLinux
 - `dnf update && dnf install epel-release mod_ssl -y && dnf install git podman podman-compose certbot python3-certbot-apache`
+- `cd hackathon-rusyoung-onboarding # К этому моменту у вас уже склонирован репозиторий`
 #### Другие
 - Похожим образом
   
