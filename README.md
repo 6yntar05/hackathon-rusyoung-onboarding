@@ -25,6 +25,6 @@
 
 # Разработчики
 
-<h4> [Малков Антон - Python ML](https://t.me/Malkov_Anton_V) </h4>
-<h4> Горячев Максим </h4>
-<h4> Толкачев Станислав - DevOps </h4>
+[Малков Антон - Python ML](https://t.me/Malkov_Anton_V) <br>
+Горячев Максим <br>
+[Толкачев Станислав - DevOps](https://github.com/6yntar05) <br>
