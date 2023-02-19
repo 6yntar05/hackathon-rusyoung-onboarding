@@ -4,6 +4,7 @@ volumes:
   nextcloud-app:
   nextcloud-data:
   nextcloud-db:
+  yb-apache:
 
 services:
   db:

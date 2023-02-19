@@ -1,9 +1,15 @@
 #!/bin/sh
 
+# Create volumes
 podman volume create nextcloud-app
 podman volume create nextcloud-data
 podman volume create nextcloud-db
+podman volume create yb-apache
 
+# Create network between nextcloud and db
+podman network create nextcloud-net
+
+# DB
 podman run --detach --replace --env MYSQL_DATABASE=nextcloud \
         --env MYSQL_USER=nextcloud \
         --env MYSQL_PASSWORD=Y2lybm8K \
@@ -11,8 +17,9 @@ podman run --detach --replace --env MYSQL_DATABASE=nextcloud \
         --volume nextcloud-db:/var/lib/mysql \
         --network nextcloud-net --restart on-failure \
         --name nextcloud-db docker.io/library/mariadb
-    
-podman run --replace --env MYSQL_HOST=nextcloud-db.dns.podman \
+
+# Nextcloud
+podman run --detach --replace --env MYSQL_HOST=nextcloud-db.dns.podman \
         --env MYSQL_DATABASE=nextcloud \
         --env MYSQL_USER=nextcloud \
         --env MYSQL_PASSWORD=Y2lybm8K \
