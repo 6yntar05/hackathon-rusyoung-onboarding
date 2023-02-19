@@ -20,3 +20,13 @@ async def edit_profile(state, id):
         cur.execute("UPDATE user SET  last_name = '{}', first_name = '{}', daterod = '{}' WHERE id == '{}'".format(
             data['last_name'], data['first_name'], data['daterod'], id))
         base.commit()
+
+async def is_user_logged_in(id):
+
+    cur.execute("SELECT 1 FROM user WHERE id = {}".format(id))
+    result = cur.fetchone()
+
+    if result and result[0]:
+        return True
+    else:
+        return False
