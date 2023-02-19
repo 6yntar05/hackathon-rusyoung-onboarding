@@ -20,6 +20,11 @@
 <p> Демо сервиса доступно по адресу: https://demo.test (по запросу)</p>
 <p> Реквизиты тестового пользователя: email: <b>guest</b>, пароль: <b>guest</b> </p>
 
+# Среда запуска
+- Развёртывание происходит эталонно на rockylinux
+- Список пакетов для установки включён в специфичный readme
+- Для клонирования репозитория нужно установить git
+
 # Развёртка
 `git clone https://github.com/6yntar05/hackathon-rusyoung-onboarding && cd hackathon-rusyoung-onboarding`
   
