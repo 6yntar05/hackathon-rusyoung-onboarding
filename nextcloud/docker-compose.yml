@@ -1,0 +1,45 @@
+version: '2'
+
+volumes:
+  nextcloud-app:
+  nextcloud-data:
+  nextcloud-db:
+  yb-apache:
+
+services:
+  db:
+    image: docker.io/library/mariadb
+    restart: on-failure
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - nextcloud-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Y2lybm8K
+      - MYSQL_PASSWORD=Y2lybm8K
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  app:
+    image: nextcloud:24-apache
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - db
+    volumes:
+      - nextcloud-app:/var/www/html
+      - nextcloud-data:/var/www/html/data
+      - yb-apache:/etc/apache2/
+
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=Y2lybm8K
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=cmVpbXUK
+      - NEXTCLOUD_TRUSTED_DOMAINS=yourdomain.com
+      - NEXTCLOUD_HOSTNAME=yourdomain.com
+      - PHP_MEMORY_LIMIT=4096M
+
