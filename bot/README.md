@@ -21,6 +21,7 @@ activate.bat
 pip install -r requierments.txt 
 ````
 Теперь наш проект готов к использоанию.
+
 ---
 
 ## Использование
