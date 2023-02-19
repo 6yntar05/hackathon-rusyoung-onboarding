@@ -40,6 +40,7 @@ async def on_startup(_):
 # Start Message
 @dp.message_handler(commands='start')
 async def send_welcome(message: types.Message):
+    await UserStateGroup.new_user.set()
     user_id = message.from_user.id
     if await sqlite_db.is_user_logged_in(user_id):
         await UserStateGroup.registrated_user.set()
@@ -84,7 +85,7 @@ async def date_in_db(message: types.Message, state: FSMContext):
 
 
 
-@dp.message_handler(text='(Список задач)')
+@dp.message_handler(text='(^(Список задач))')
 async def spisok_zadac(message: types.Message, state: FSMContext):
     await message.reply("Твой список задач:"
                          "Сходить поговорить с руководителем"
@@ -108,6 +109,7 @@ async def registrated_user(message: types.Message, state: FSMContext):
     buttons = ["Список задач", "Контакты руководителей", "Основная документация"]
     keyboard.add(*buttons)
     await message.reply('Добро пожаловать в личный кабинет сотрудника!', reply_markup=keyboard)
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
