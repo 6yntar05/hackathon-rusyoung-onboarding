@@ -41,4 +41,4 @@ def token_get() -> str:
                 raise ValueError("Uncorrect token!")
             return _token
     
-    raise NameError("Unnable to find tokenfile. Write the token in ..token.txt file, for example")
+    raise NameError("Unnable to find tokenfile. Write the token in .token.txt file, for example")
