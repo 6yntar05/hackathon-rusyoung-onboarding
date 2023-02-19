@@ -35,6 +35,6 @@
 Читать nextcloud/README.md
 
 # Разработчики
-[Малков Антон - Python ML](https://t.me/Malkov_Anton_V) <br>
+[Малков Антон - Python ML](https://t.me/Malkov_Anton_V) <- телега <br>
 Горячев Максим <br>
-[Толкачев Станислав - DevOps](https://github.com/6yntar05) <br>
+[Толкачев Станислав - DevOps](https://github.com/6yntar05) <- телегу не дам <br>
